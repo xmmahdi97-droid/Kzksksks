@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>سرای اجاره | مدیریت آگهی‌های اجاره املاک</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0a1f44;--navy2:#14397a;--gold:#c8a24a;--gold2:#e8cb7c;--bg:#f5f6fa;--line:#e3e6ee;--txt:#1b2540;--mut:#6b7590;--r:16px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Vazirmatn',Tahoma,sans-serif;background:var(--bg);color:var(--txt);line-height:1.7;min-height:100vh}
+button,input,select,textarea{font-family:inherit;font-size:inherit;color:inherit}
+button{cursor:pointer;border:0}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+header{background:var(--navy);color:#fff;position:sticky;top:0;z-index:30;box-shadow:0 2px 20px rgba(10,31,68,.3)}
+.bar{max-width:1200px;margin:auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.2rem}
+.logo i{width:38px;height:38px;border-radius:10px;background:var(--gold);color:var(--navy);display:grid;place-items:center;font-style:normal;font-size:1.2rem}
+.btn{padding:10px 20px;border-radius:12px;font-weight:700;transition:.25s;display:inline-flex;align-items:center;gap:6px}
+.btn-gold{background:var(--gold);color:var(--navy)}
+.btn-gold:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 8px 20px rgba(200,162,74,.4)}
+.btn-navy{background:var(--navy);color:#fff}.btn-navy:hover{background:var(--navy2)}
+.btn-line{background:#fff;border:1.5px solid var(--line);color:var(--txt)}.btn-line:hover{border-color:var(--gold)}
+.btn-red{background:#c0392b;color:#fff}
+.hero{background:var(--navy);color:#fff;padding:56px 20px 110px;position:relative;overflow:hidden;text-align:center}
+.hero:before,.hero:after{content:"";position:absolute;border:1.5px solid rgba(200,162,74,.3);border-radius:50%;animation:float 14s ease-in-out infinite}
+.hero:before{width:420px;height:420px;top:-180px;right:-120px}
+.hero:after{width:300px;height:300px;bottom:-150px;left:-80px;animation-delay:-6s}
+@keyframes float{50%{transform:translate(20px,24px) scale(1.06)}}
+.hero h1{font-size:clamp(1.8rem,5vw,3rem);font-weight:800;position:relative;animation:rise .9s both}
+.hero h1 span{color:var(--gold2)}
+.hero p{color:#c3cde4;margin-top:10px;position:relative;animation:rise .9s .15s both}
+@keyframes rise{from{opacity:0;transform:translateY(24px)}}
+.stats{display:flex;justify-content:center;gap:34px;margin-top:26px;position:relative;animation:rise .9s .3s both;flex-wrap:wrap}
+.stats b{display:block;font-size:1.6rem;color:var(--gold2)}.stats small{color:#c3cde4}
+main{max-width:1200px;margin:-70px auto 60px;padding:0 20px;position:relative}
+.panel{background:#fff;border-radius:20px;padding:20px;box-shadow:0 18px 50px rgba(10,31,68,.14);animation:rise .8s .4s both}
+.search{position:relative}
+.search input{width:100%;padding:15px 50px 15px 16px;border:1.5px solid var(--line);border-radius:14px;background:var(--bg);transition:.2s}
+.search input:focus{border-color:var(--gold);background:#fff;outline:0}
+.search span{position:absolute;right:16px;top:50%;transform:translateY(-50%);opacity:.6}
+.filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:14px}
+label.f{display:flex;flex-direction:column;gap:4px;font-size:.82rem;color:var(--mut);font-weight:500}
+.f input,.f select,.f textarea{padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--txt);width:100%}
+.f input:focus,.f select:focus,.f textarea:focus{border-color:var(--gold);outline:0}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.chip{padding:8px 16px;border-radius:999px;background:var(--bg);border:1.5px solid transparent;font-weight:500;transition:.2s}
+.chip:hover{border-color:var(--gold)}
+.chip.on{background:var(--navy);color:var(--gold2)}
+.head{display:flex;justify-content:space-between;align-items:center;margin:28px 0 14px;flex-wrap:wrap;gap:10px}
+.head h2{font-size:1.3rem;color:var(--navy)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:22px}
+.card{background:#fff;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);transition:.3s;display:flex;flex-direction:column;animation:pop .5s both}
+@keyframes pop{from{opacity:0;transform:scale(.94)}}
+.card:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(10,31,68,.15);border-color:var(--gold)}
+.pic{height:190px;position:relative;overflow:hidden;cursor:pointer}
+.pic img{width:100%;height:100%;object-fit:cover;transition:.5s}
+.card:hover .pic img{transform:scale(1.08)}
+.ph{width:100%;height:100%;display:grid;place-items:center;font-size:4rem;background:linear-gradient(135deg,var(--navy),var(--navy2))}
+.ph.villa{background:linear-gradient(135deg,#14397a,#1d5aa8)}.ph.house{background:linear-gradient(135deg,#0a1f44,#3a4f7d)}.ph.shop{background:linear-gradient(135deg,#2b2f4a,#8a6d2b)}
+.badge{position:absolute;top:12px;right:12px;background:var(--gold);color:var(--navy);padding:3px 12px;border-radius:999px;font-weight:700;font-size:.78rem}
+.cnt{position:absolute;bottom:10px;left:10px;background:rgba(10,31,68,.8);color:#fff;border-radius:8px;padding:1px 9px;font-size:.75rem}
+.body{padding:16px;display:flex;flex-direction:column;gap:10px;flex:1}
+.body h3{font-size:1.02rem;color:var(--navy);line-height:1.5}
+.loc{color:var(--mut);font-size:.85rem}
+.meta{display:flex;gap:14px;font-size:.84rem;color:var(--mut);flex-wrap:wrap}
+.price{display:grid;grid-template-columns:1fr 1fr;gap:8px;background:var(--bg);border-radius:12px;padding:10px}
+.price div small{display:block;color:var(--mut);font-size:.72rem}
+.price div b{color:var(--navy);font-size:.92rem}
+.price div:last-child b{color:#9a7620}
+.acts{display:flex;gap:8px;margin-top:auto}
+.acts .btn{flex:1;justify-content:center;padding:8px;font-size:.88rem}
+.acts .ic{flex:0 0 42px}
+.empty{grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--mut)}
+.empty div{font-size:3.4rem}
+#ov{position:fixed;inset:0;background:rgba(10,31,68,.65);backdrop-filter:blur(5px);z-index:50;display:none;align-items:flex-start;justify-content:center;overflow:auto;padding:30px 14px}
+#ov.on{display:flex;animation:fade .25s}
+@keyframes fade{from{opacity:0}}
+.modal{background:#fff;border-radius:22px;width:100%;max-width:760px;position:relative;animation:zoom .35s cubic-bezier(.2,.9,.3,1.2);overflow:hidden}
+@keyframes zoom{from{opacity:0;transform:scale(.9) translateY(30px)}}
+.x{position:absolute;top:14px;left:14px;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.95);z-index:3;font-size:1.1rem;box-shadow:0 2px 10px rgba(0,0,0,.2)}
+.x:hover{background:var(--gold)}
+.mb{padding:22px}
+.mt{background:var(--navy);color:#fff;padding:20px 22px;font-weight:800;font-size:1.15rem;border-bottom:3px solid var(--gold)}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form .w{grid-column:1/-1}
+.checks{display:flex;gap:10px;flex-wrap:wrap}
+.checks label{display:flex;gap:6px;align-items:center;padding:6px 14px;border:1.5px solid var(--line);border-radius:999px;cursor:pointer}
+.checks input:checked+span{color:#9a7620;font-weight:700}
+.thumbs{display:flex;gap:8px;flex-wrap:wrap}
+.thumbs div{position:relative;width:78px;height:62px;border-radius:10px;overflow:hidden}
+.thumbs img{width:100%;height:100%;object-fit:cover}
+.thumbs button{position:absolute;top:2px;left:2px;background:#c0392b;color:#fff;width:20px;height:20px;border-radius:50%;font-size:.7rem}
+.err{color:#c0392b;font-size:.85rem;min-height:1.3em;grid-column:1/-1}
+.gal{height:330px;background:var(--navy);position:relative}
+.gal img{width:100%;height:100%;object-fit:cover;animation:fade .4s}
+.gt{display:flex;gap:6px;padding:10px 22px 0;overflow:auto}
+.gt img{width:70px;height:52px;object-fit:cover;border-radius:8px;cursor:pointer;opacity:.55;border:2px solid transparent;transition:.2s}
+.gt img.on,.gt img:hover{opacity:1;border-color:var(--gold)}
+.specs{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:16px 0}
+.specs div{background:var(--bg);border-radius:12px;padding:10px 12px}
+.specs small{color:var(--mut);display:block;font-size:.75rem}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.tags span{background:#fbf5e4;color:#7d5f12;padding:3px 12px;border-radius:999px;font-size:.82rem;font-weight:500}
+.calc{background:var(--navy);color:#fff;border-radius:18px;padding:20px;margin-top:18px}
+.calc h4{color:var(--gold2);margin-bottom:12px}
+.calc input[type=range]{width:100%;accent-color:var(--gold);direction:ltr;margin:10px 0}
+.res{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.res div{background:rgba(255,255,255,.08);border-radius:12px;padding:10px 14px}
+.res small{color:#b9c5e0;display:block;font-size:.76rem}
+.res b{font-size:1.15rem;color:var(--gold2)}
+.rate{display:flex;align-items:center;gap:8px;font-size:.84rem;color:#c3cde4}
+.rate input{width:64px;padding:4px 8px;border-radius:8px;border:0;text-align:center}
+#toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,100px);background:var(--navy);color:#fff;padding:12px 26px;border-radius:12px;border-bottom:3px solid var(--gold);z-index:99;transition:.4s;opacity:0}
+#toast.on{transform:translate(-50%,0);opacity:1}
+@media(max-width:600px){.form{grid-template-columns:1fr}.gal{height:230px}.bar .btn span{display:none}.stats{gap:20px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header><div class="bar">
+  <div class="logo"><i>🏛</i>سرای اجاره</div>
+  <button class="btn btn-gold" onclick="openForm()">＋ <span>ثبت آگهی جدید</span></button>
+</div></header>
+
+<section class="hero">
+  <h1>ملک مناسبتان را <span>اجاره کنید</span></h1>
+  <p>آپارتمان، خانه، ویلا و مغازه؛ با محاسبه هوشمند رهن و اجاره</p>
+  <div class="stats"><div><b id="s1">۰</b><small>آگهی فعال</small></div><div><b id="s2">۰</b><small>شهر</small></div><div><b id="s3">۰</b><small>میانگین اجاره ماهانه</small></div></div>
+</section>
+
+<main>
+  <div class="panel">
+    <div class="search"><span>🔍</span><input id="q" placeholder="جستجو در عنوان، شهر، محله یا توضیحات..." oninput="render()"></div>
+    <div class="filters">
+      <label class="f">شهر<select id="fc" onchange="render()"></select></label>
+      <label class="f">حداقل اجاره (میلیون تومان)<input id="pmin" inputmode="decimal" placeholder="مثلاً ۵" oninput="render()"></label>
+      <label class="f">حداکثر اجاره (میلیون تومان)<input id="pmax" inputmode="decimal" placeholder="مثلاً ۵۰" oninput="render()"></label>
+      <label class="f">حداکثر رهن (میلیون تومان)<input id="dmax" inputmode="decimal" placeholder="مثلاً ۸۰۰" oninput="render()"></label>
+      <label class="f">مرتب‌سازی<select id="so" onchange="render()"><option value="new">جدیدترین</option><option value="ra">اجاره: ارزان‌ترین</option><option value="rd">اجاره: گران‌ترین</option><option value="da">رهن: کمترین</option></select></label>
+    </div>
+    <div class="chips" id="chips"></div>
+  </div>
+  <div class="head"><h2 id="ttl">آگهی‌ها</h2><button class="btn btn-line" onclick="resetF()">پاک‌کردن فیلترها</button></div>
+  <div class="grid" id="grid"></div>
+</main>
+
+<div id="ov" onclick="if(event.target===this)closeM()"><div class="modal" id="md"></div></div>
+<div id="toast"></div>
+
+<script>
+const KEY='sarai_ejare_v1';
+const CAT={apartment:['آپارتمان','🏢'],house:['خانه','🏠'],villa:['ویلا','🏡'],shop:['مغازه','🏪']};
+const AMEN=['پارکینگ','آسانسور','انباری','بالکن','تراس','حیاط','استخر','سیستم گرمایش','کابینت'];
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fa=n=>Number(n).toLocaleString('fa-IR',{maximumFractionDigits:1});
+const norm=s=>String(s).replace(/[۰-۹]/g,d=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(d)).replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/٫/g,'.').replace(/[,،\s]/g,'');
+const num=v=>{const n=parseFloat(norm(v));return isNaN(n)?null:n};
+const money=m=>m>=1000?fa(m/1000)+' میلیارد تومان':fa(m)+' میلیون تومان';
+let cat='all',imgs=[],editId=null,list=load();
+
+function load(){try{const d=JSON.parse(localStorage.getItem(KEY));if(Array.isArray(d))return d}catch(e){}
+  const seed=[
+   {id:1,title:'آپارتمان نوساز ۳ خوابه با ویو شهر',cat:'apartment',city:'تهران',district:'سعادت‌آباد',area:128,rooms:3,year:1401,deposit:900,rent:35,phone:'۰۹۱۲۰۰۰۰۰۰۱',desc:'واحد تمام‌نور، طبقه پنجم، کف سرامیک و کابینت‌های هایگلاس. دسترسی عالی به مترو و مراکز خرید.',amen:['پارکینگ','آسانسور','انباری','بالکن'],imgs:[]},
+   {id:2,title:'ویلای باغ دوبلکس با استخر',cat:'villa',city:'شمیرانات',district:'لواسان',area:420,rooms:4,year:1398,deposit:3000,rent:120,phone:'۰۹۱۲۰۰۰۰۰۰۲',desc:'ویلا با ۸۰۰ متر محوطه، استخر روباز، آلاچیق و باربیکیو. محیطی آرام برای زندگی دائم.',amen:['پارکینگ','حیاط','استخر','تراس'],imgs:[]},
+   {id:3,title:'مغازه ۴۰ متری بر خیابان اصلی',cat:'shop',city:'اصفهان',district:'چهارباغ',area:40,rooms:0,year:1395,deposit:600,rent:45,phone:'۰۹۱۲۰۰۰۰۰۰۳',desc:'مغازه با پاگرد و سرقفلی، مناسب پوشاک، عطر و کافه. تردد بسیار بالا.',amen:['انباری'],imgs:[]},
+   {id:4,title:'خانه ویلایی ۲ طبقه با حیاط',cat:'house',city:'شیراز',district:'معالی‌آباد',area:210,rooms:3,year:1399,deposit:700,rent:28,phone:'۰۹۱۲۰۰۰۰۰۰۴',desc:'خانه دربست، بازسازی‌شده، حیاط دلباز با درختان میوه و پارکینگ اختصاصی.',amen:['پارکینگ','حیاط','انباری'],imgs:[]},
+   {id:5,title:'آپارتمان ۲ خوابه نزدیک ساحل',cat:'apartment',city:'رشت',district:'گلسار',area:95,rooms:2,year:1400,deposit:350,rent:18,phone:'۰۹۱۲۰۰۰۰۰۰۵',desc:'واحد شیک و کم‌واحد، مناسب خانواده‌های کوچک، نزدیک پارک و مدرسه.',amen:['پارکینگ','آسانسور','بالکن'],imgs:[]},
+   {id:6,title:'ویلای ساحلی ۳ خوابه',cat:'villa',city:'رامسر',district:'ساحل',area:250,rooms:3,year:1397,deposit:1500,rent:75,phone:'۰۹۱۲۰۰۰۰۰۰۶',desc:'ویلای شخصی‌ساز، ۱۰۰ متر تا ساحل، مناسب اقامت بلندمدت.',amen:['پارکینگ','حیاط','تراس'],imgs:[]}];
+  localStorage.setItem(KEY,JSON.stringify(seed));return seed}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(list))}catch(e){toast('حافظه مرورگر پر است؛ تصاویر کمتری انتخاب کنید')}}
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(e.t);e.t=setTimeout(()=>e.classList.remove('on'),2600)}
+
+function pic(x){return x.imgs&&x.imgs.length?`<img src="${x.imgs[0]}" alt="${esc(x.title)}">`:`<div class="ph ${x.cat}">${CAT[x.cat][1]}</div>`}
+function chips(){const c=[['all','همه'],...Object.entries(CAT).map(([k,v])=>[k,v[0]])];
+  $('#chips').innerHTML=c.map(([k,n])=>`<button class="chip ${cat===k?'on':''}" onclick="cat='${k}';chips();render()">${k!='all'?CAT[k][1]+' ':''}${n}</button>`).join('')}
+function cities(){const cur=$('#fc').value;const cs=[...new Set(list.map(x=>x.city))].sort((a,b)=>a.localeCompare(b,'fa'));
+  $('#fc').innerHTML='<option value="">همه شهرها</option>'+cs.map(c=>`<option ${c===cur?'selected':''}>${esc(c)}</option>`).join('')}
+function stats(){$('#s1').textContent=fa(list.length);$('#s2').textContent=fa(new Set(list.map(x=>x.city)).size);
+  $('#s3').textContent=list.length?fa(Math.round(list.reduce((a,x)=>a+x.rent,0)/list.length*10)/10)+' میلیون':'—'}
+
+function render(){
+  const q=norm($('#q').value.trim()).toLowerCase(),qq=$('#q').value.trim().toLowerCase(),city=$('#fc').value,
+   pmin=num($('#pmin').value),pmax=num($('#pmax').value),dmax=num($('#dmax').value),so=$('#so').value;
+  let r=list.filter(x=>(cat==='all'||x.cat===cat)&&(!city||x.city===city)&&(pmin==null||x.rent>=pmin)&&(pmax==null||x.rent<=pmax)&&(dmax==null||x.deposit<=dmax)&&
+    (!qq||[x.title,x.city,x.district,x.desc,CAT[x.cat][0]].join(' ').toLowerCase().includes(qq)));
+  r.sort((a,b)=>so==='ra'?a.rent-b.rent:so==='rd'?b.rent-a.rent:so==='da'?a.deposit-b.deposit:b.id-a.id);
+  $('#ttl').textContent=`${fa(r.length)} آگهی یافت شد`;
+  $('#grid').innerHTML=r.length?r.map((x,i)=>`<article class="card" style="animation-delay:${Math.min(i,10)*.06}s">
+   <div class="pic" onclick="showD(${x.id})"><span class="badge">${CAT[x.cat][0]}</span>${pic(x)}${x.imgs&&x.imgs.length>1?`<span class="cnt">📷 ${fa(x.imgs.length)}</span>`:''}</div>
+   <div class="body"><h3>${esc(x.title)}</h3><div class="loc">📍 ${esc(x.city)}${x.district?'، '+esc(x.district):''}</div>
+   <div class="meta"><span>📐 ${fa(x.area)} متر</span>${x.rooms?`<span>🛏 ${fa(x.rooms)} خواب</span>`:''}${x.year?`<span>🗓 ${norm(x.year)>0?fa(x.year).replace(/٬/g,''):''}</span>`:''}</div>
+   <div class="price"><div><small>رهن</small><b>${money(x.deposit)}</b></div><div><small>اجاره ماهانه</small><b>${money(x.rent)}</b></div></div>
+   <div class="acts"><button class="btn btn-navy" onclick="showD(${x.id})">مشاهده جزئیات</button><button class="btn btn-line ic" title="ویرایش" onclick="openForm(${x.id})">✏️</button><button class="btn btn-line ic" title="حذف" onclick="askDel(${x.id})">🗑</button></div></div></article>`).join('')
+   :`<div class="empty"><div>🏚</div><p>ملکی با این مشخصات پیدا نشد. فیلترها را تغییر دهید یا آگهی جدید ثبت کنید.</p></div>`;
+  stats()}
+function resetF(){['q','pmin','pmax','dmax'].forEach(i=>$('#'+i).value='');$('#fc').value='';$('#so').value='new';cat='all';chips();render()}
+
+function openM(h){$('#md').innerHTML=`<button class="x" onclick="closeM()" aria-label="بستن">✕</button>`+h;$('#ov').classList.add('on');document.body.style.overflow='hidden';$('#ov').scrollTop=0}
+function closeM(){$('#ov').classList.remove('on');document.body.style.overflow=''}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeM()});
+
+function showD(id){const x=list.find(v=>v.id===id);if(!x)return;
+  const g=x.imgs&&x.imgs.length?x.imgs:[];const max=Math.round(x.deposit+x.rent*100/3);
+  openM(`<div class="gal" id="gal">${g.length?`<img src="${g[0]}" alt="">`:`<div class="ph ${x.cat}" style="font-size:7rem">${CAT[x.cat][1]}</div>`}</div>
+  ${g.length>1?`<div class="gt">${g.map((s,i)=>`<img src="${s}" class="${i?'':'on'}" onclick="gal(this)" alt="">`).join('')}</div>`:''}
+  <div class="mb"><span class="badge" style="position:static;display:inline-block">${CAT[x.cat][0]}</span>
+  <h2 style="color:var(--navy);margin:8px 0 2px">${esc(x.title)}</h2><div class="loc">📍 ${esc(x.city)}${x.district?'، '+esc(x.district):''}</div>
+  <div class="specs"><div><small>متراژ</small><b>${fa(x.area)} متر</b></div>${x.rooms?`<div><small>اتاق خواب</small><b>${fa(x.rooms)}</b></div>`:''}${x.year?`<div><small>سال ساخت</small><b>${fa(x.year).replace(/٬/g,'')}</b></div>`:''}<div><small>رهن</small><b>${money(x.deposit)}</b></div><div><small>اجاره ماهانه</small><b>${money(x.rent)}</b></div>${x.phone?`<div><small>تماس</small><b><a href="tel:${esc(norm(x.phone))}" style="color:inherit">${esc(x.phone)}</a></b></div>`:''}</div>
+  ${x.amen&&x.amen.length?`<div class="tags">${x.amen.map(a=>`<span>✓ ${esc(a)}</span>`).join('')}</div>`:''}
+  <p style="color:var(--mut)">${esc(x.desc)||'توضیحاتی ثبت نشده است.'}</p>
+  <div class="calc"><h4>🧮 محاسبه‌گر تبدیل رهن و اجاره</h4>
+   <div class="rate">نرخ تبدیل: هر ۱۰۰ میلیون رهن، ماهانه <input id="rt" value="۳" inputmode="decimal" oninput="calc()"> میلیون اجاره</div>
+   <input type="range" id="sl" min="0" max="${max}" step="10" value="${x.deposit}" oninput="calc()" aria-label="مبلغ رهن">
+   <div class="res"><div><small>رهن انتخابی</small><b id="rd">—</b></div><div><small>اجاره ماهانه متناسب</small><b id="rr">—</b></div><div><small>هزینه سالانه اجاره</small><b id="ry">—</b></div><div><small>پیش‌پرداخت اولیه (رهن + یک ماه)</small><b id="rp">—</b></div></div></div>
+  <div style="display:flex;gap:10px;margin-top:18px"><button class="btn btn-gold" onclick="openForm(${x.id})">✏️ ویرایش</button><button class="btn btn-line" onclick="askDel(${x.id})">🗑 حذف</button></div></div>`);
+  window.cur=x;calc()}
+function gal(t){document.querySelectorAll('.gt img').forEach(i=>i.classList.remove('on'));t.classList.add('on');$('#gal').innerHTML=`<img src="${t.src}" alt="">`}
+function calc(){const x=window.cur,d=+$('#sl').value,rt=num($('#rt').value)??3;
+  const rent=Math.max(0,x.rent-(d-x.deposit)*rt/100);
+  $('#rd').textContent=money(d);$('#rr').textContent=money(Math.round(rent*10)/10);
+  $('#ry').textContent=money(Math.round(rent*12*10)/10);$('#rp').textContent=money(Math.round((d+rent)*10)/10)}
+
+function openForm(id){let x=id?list.find(v=>v.id===id):null;editId=id||null;imgs=x?[...(x.imgs||[])]:[];x=x||{};
+  const v=(k,d='')=>esc(x[k]??d);const val=n=>n?norm(n):'';
+  openM(`<div class="mt">${id?'ویرایش آگهی':'ثبت آگهی جدید'}</div><div class="mb"><div class="form">
+  <label class="f w">عنوان آگهی *<input id="t" value="${v('title')}" maxlength="90" placeholder="مثلاً آپارتمان ۲ خوابه نوساز"></label>
+  <label class="f">دسته‌بندی *<select id="c">${Object.entries(CAT).map(([k,c])=>`<option value="${k}" ${x.cat===k?'selected':''}>${c[1]} ${c[0]}</option>`).join('')}</select></label>
+  <label class="f">شهر *<input id="ci" list="cl" value="${v('city')}"><datalist id="cl">${['تهران','مشهد','اصفهان','شیراز','تبریز','کرج','رشت','قم','اهواز','کیش'].map(c=>`<option>${c}</option>`).join('')}</datalist></label>
+  <label class="f">محله / منطقه<input id="di" value="${v('district')}"></label>
+  <label class="f">متراژ (متر مربع) *<input id="ar" inputmode="numeric" value="${val(x.area)}"></label>
+  <label class="f">تعداد اتاق خواب<input id="ro" inputmode="numeric" value="${val(x.rooms)}"></label>
+  <label class="f">سال ساخت<input id="ye" inputmode="numeric" placeholder="مثلاً ۱۴۰۱" value="${val(x.year)}"></label>
+  <label class="f">رهن (میلیون تومان) *<input id="de" inputmode="decimal" value="${val(x.deposit)}"></label>
+  <label class="f">اجاره ماهانه (میلیون تومان) *<input id="re" inputmode="decimal" value="${val(x.rent)}"></label>
+  <label class="f w">شماره تماس<input id="ph" inputmode="tel" value="${v('phone')}" placeholder="۰۹۱۲..."></label>
+  <div class="w"><div style="font-size:.82rem;color:var(--mut);margin-bottom:6px">امکانات</div><div class="checks">${AMEN.map(a=>`<label><input type="checkbox" value="${a}" ${(x.amen||[]).includes(a)?'checked':''} hidden><span>＋ ${a}</span></label>`).join('')}</div></div>
+  <label class="f w">توضیحات<textarea id="dc" rows="3">${v('desc')}</textarea></label>
+  <div class="w"><div style="font-size:.82rem;color:var(--mut);margin-bottom:6px">تصاویر (حداکثر ۵ عکس)</div>
+   <input type="file" id="fi" accept="image/*" multiple onchange="addImgs(this.files)"><div class="thumbs" id="th" style="margin-top:10px"></div></div>
+  <div class="err" id="er"></div></div>
+  <div style="display:flex;gap:10px;margin-top:6px"><button class="btn btn-gold" onclick="saveF()">${id?'ذخیره تغییرات':'ثبت آگهی'}</button><button class="btn btn-line" onclick="closeM()">انصراف</button></div></div>`);
+  thumbs()}
+function thumbs(){$('#th').innerHTML=imgs.map((s,i)=>`<div><img src="${s}" alt=""><button onclick="imgs.splice(${i},1);thumbs()" aria-label="حذف تصویر">✕</button></div>`).join('')}
+function addImgs(files){[...files].forEach(f=>{if(imgs.length>=5)return;const r=new FileReader();
+  r.onload=()=>{const im=new Image();im.onload=()=>{const m=900,s=Math.min(1,m/Math.max(im.width,im.height)),c=document.createElement('canvas');
+   c.width=im.width*s;c.height=im.height*s;c.getContext('2d').drawImage(im,0,0,c.width,c.height);
+   if(imgs.length<5){imgs.push(c.toDataURL('image/jpeg',.72));thumbs()}};im.src=r.result};r.readAsDataURL(f)});$('#fi').value=''}
+function saveF(){const g=i=>$('#'+i).value.trim(),e=m=>$('#er').textContent=m;
+  const o={title:g('t'),cat:$('#c').value,city:g('ci'),district:g('di'),area:num(g('ar')),rooms:num(g('ro'))||0,year:num(g('ye'))||0,deposit:num(g('de')),rent:num(g('re')),phone:g('ph'),desc:g('dc'),
+   amen:[...document.querySelectorAll('.checks input:checked')].map(i=>i.value),imgs:[...imgs]};
+  if(!o.title)return e('عنوان آگهی را وارد کنید.');if(!o.city)return e('نام شهر را وارد کنید.');
+  if(!o.area||o.area<=0)return e('متراژ را به عدد وارد کنید.');
+  if(o.deposit==null||o.deposit<0)return e('مبلغ رهن را به عدد وارد کنید (۰ برای اجاره کامل).');
+  if(o.rent==null||o.rent<0)return e('مبلغ اجاره ماهانه را به عدد وارد کنید.');
+  if(editId){const i=list.findIndex(v=>v.id===editId);list[i]={...list[i],...o}}else list.unshift({id:Date.now(),...o});
+  save();closeM();cities();render();toast(editId?'تغییرات ذخیره شد':'آگهی ثبت شد')}
+function askDel(id){const x=list.find(v=>v.id===id);
+  openM(`<div class="mt">حذف آگهی</div><div class="mb"><p>آگهی «${esc(x.title)}» برای همیشه حذف می‌شود. ادامه می‌دهید؟</p>
+  <div style="display:flex;gap:10px;margin-top:18px"><button class="btn btn-red" onclick="del(${id})">بله، حذف شود</button><button class="btn btn-line" onclick="closeM()">انصراف</button></div></div>`)}
+function del(id){list=list.filter(v=>v.id!==id);save();closeM();cities();render();toast('آگهی حذف شد')}
+
+chips();cities();render();
+</script>
+</body>
+</html>
